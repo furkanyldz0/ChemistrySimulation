@@ -5,34 +5,51 @@ using UnityEngine.UI;
 public class CameraController : MonoBehaviour
 {
     [Header("Cameras")]
-    [SerializeField] private CinemachineVirtualCamera masaKamerasi;
-    [SerializeField] private CinemachineVirtualCamera dolapKamerasi;
-    [SerializeField] private Button LookTableBtn;
-    [SerializeField] private Button LookCupboardBtn;
-    // Başlangıçta masaya baksın
+    [SerializeField] private CinemachineVirtualCamera table1Camera;
+    [SerializeField] private CinemachineVirtualCamera table2Camera;
+    [SerializeField] private CinemachineVirtualCamera shelfCamera;
+    [SerializeField] private Button lookAtTable1Button;
+    [SerializeField] private Button lookAtTable2Button;
+    [SerializeField] private Button LookAtShelfButton;
+    [SerializeField] private Transform leftCorner1, leftCorner2, rightCorner1, rightCorner2;
     
     private void Start()
     {
-        MasayaDon();
-        LookTableBtn.gameObject.SetActive(false);
-        LookCupboardBtn.gameObject.SetActive(true);
+        LookAtTable1();
     }
 
-    public void DolabaBak()
+    public void LookAtShelf()
     {
-        // Dolap kamerasının önceliğini artır, diğerini düşür
-        dolapKamerasi.Priority = 11;
-        masaKamerasi.Priority = 10;
-        LookTableBtn.gameObject.SetActive(true);
-        LookCupboardBtn.gameObject.SetActive(false);
+        shelfCamera.Priority = 12;
+        table1Camera.Priority = 11;
+        table2Camera.Priority = 10;
+        lookAtTable2Button.gameObject.SetActive(true);
+        lookAtTable1Button.gameObject.SetActive(true);
+        LookAtShelfButton.gameObject.SetActive(false);
+        lookAtTable2Button.transform.position = leftCorner1.position;
+        lookAtTable1Button.transform.position = leftCorner2.position;
     }
 
-    public void MasayaDon()
+    public void LookAtTable1()
     {
-        // Masa kamerasının önceliğini artır
-        masaKamerasi.Priority = 11;
-        dolapKamerasi.Priority = 10;
-        LookTableBtn.gameObject.SetActive(false);
-        LookCupboardBtn.gameObject.SetActive(true);
+        shelfCamera.Priority = 11;
+        table1Camera.Priority = 12;
+        table2Camera.Priority = 10;
+        lookAtTable1Button.gameObject.SetActive(false);
+        lookAtTable2Button.gameObject.SetActive(true);
+        LookAtShelfButton.gameObject.SetActive(true);
+        LookAtShelfButton.transform.position = rightCorner1.position;
+        lookAtTable2Button.transform.position = leftCorner1.position;
+    }
+    public void LookAtTable2()
+    {
+        shelfCamera.Priority = 10;
+        table1Camera.Priority = 11;
+        table2Camera.Priority = 12;
+        lookAtTable2Button.gameObject.SetActive(false);
+        lookAtTable1Button.gameObject.SetActive(true);
+        LookAtShelfButton.gameObject.SetActive(true);
+        LookAtShelfButton.transform.position = rightCorner1.position;
+        lookAtTable1Button.transform.position = rightCorner2.position;
     }
 }
