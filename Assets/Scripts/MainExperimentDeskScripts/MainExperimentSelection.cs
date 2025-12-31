@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SelectionManager : MonoBehaviour
+public class MainExperimentSelection : MonoBehaviour
 {
     public event EventHandler<OnIngredientAddedEventArgs> OnIngredientAdded;
     public class OnIngredientAddedEventArgs : EventArgs {

@@ -14,7 +14,7 @@ public class ExplosionReaction : MonoBehaviour
         Debug.Log("Patlama Tepkimesi");
         Destroy(gameObject, life);
         
-        beakerMesh = BeakerManager.Instance.GetComponentInChildren<MeshRenderer>();
+        beakerMesh = MainExperimentBeaker.Instance.GetComponentInChildren<MeshRenderer>();
         DestroyBeaker();
     }
 
@@ -26,7 +26,7 @@ public class ExplosionReaction : MonoBehaviour
 
     private void DestroyBeaker() {
         beakerMesh.enabled = false;
-        BeakerManager.Instance.GetMainLiquidRenderer().gameObject.SetActive(false);
+        MainExperimentBeaker.Instance.GetMainLiquidRenderer().gameObject.SetActive(false);
     }
 
 }

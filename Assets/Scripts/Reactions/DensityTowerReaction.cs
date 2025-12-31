@@ -13,10 +13,10 @@ public class DensityTowerReaction : MonoBehaviour
     {
         Debug.Log("Yoðunluk Kulesi tepkimesi");
 
-        mainLiquid = BeakerManager.Instance.GetMainLiquidRenderer();
+        mainLiquid = MainExperimentBeaker.Instance.GetMainLiquidRenderer();
         mainLiquid.gameObject.SetActive(false);
 
-        layeredLiquids = BeakerManager.Instance.GetLayeredLiquidRenderers();
+        layeredLiquids = MainExperimentBeaker.Instance.GetLayeredLiquidRenderers();
 
         for(int i = 0; i < layeredLiquids.Length; i++) {
             layeredLiquids[i].gameObject.SetActive(true);

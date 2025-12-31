@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BeakerManager : MonoBehaviour {
-    public static BeakerManager Instance { get; private set; }
+public class MainExperimentBeaker : MonoBehaviour {
+    public static MainExperimentBeaker Instance { get; private set; }
 
-    [SerializeField] private SelectionManager ingredientManager;
+    [SerializeField] private MainExperimentSelection ingredientManager;
     [SerializeField] private List<RecipeSO> allRecipes;
 
     [SerializeField] private MeshRenderer mainLiquidRenderer;
@@ -20,7 +20,7 @@ public class BeakerManager : MonoBehaviour {
 
     private List<LabObject> labObjects;
 
-    private void ÝngredientManager_OnIngredientAdded(object sender, SelectionManager.OnIngredientAddedEventArgs e) {
+    private void ÝngredientManager_OnIngredientAdded(object sender, MainExperimentSelection.OnIngredientAddedEventArgs e) {
         AddIngredient(e.labObject);
         Debug.Log(e.labObject.GetLabObjectSO().objectName + " þuan beherde mevcut.");
     }

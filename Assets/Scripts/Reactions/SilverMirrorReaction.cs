@@ -12,7 +12,7 @@ public class SilverMirrorReaction : MonoBehaviour
     {
         Debug.Log("Gümüþ Ayna tepkimesi");
 
-        mainLiquid = BeakerManager.Instance.GetMainLiquidRenderer();
+        mainLiquid = MainExperimentBeaker.Instance.GetMainLiquidRenderer();
         mainLiquid.material = silverMirrorMaterial;
         //mainLiquid.gameObject.SetActive(false);
 
