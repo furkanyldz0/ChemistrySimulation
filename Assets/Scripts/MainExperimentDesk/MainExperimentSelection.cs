@@ -1,9 +1,7 @@
 using DG.Tweening;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -151,5 +149,22 @@ public class MainExperimentSelection : MonoBehaviour
         yield return new WaitForSeconds(duration);
         effect.Play();
     }
+
+    public void ScriptSetActive(bool check) {
+        if (check) {
+            enabled = true;
+            //Debug.Log("MainExperimentSelection.enabled = true");
+        }  
+        else
+            StartCoroutine(DisableScriptRoutine(addingTimeCounter)); //malzemeyi koyarken deaktive olmasýný engellemek için routine kullanýyoruz
+
+    }
+
+    private IEnumerator DisableScriptRoutine(float duration) {
+        yield return new WaitForSeconds(duration);
+        enabled = false;
+        //Debug.Log("MainExperimentSelection.enabled = false");
+    }//bug var!
+     //eðer sývý dökerken hemen masa deðiþtirip ana masaya geri döndüðünde script false kalýyor
 
 }

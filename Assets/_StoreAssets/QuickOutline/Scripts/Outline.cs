@@ -60,7 +60,7 @@ public class Outline : MonoBehaviour {
   private Color outlineColor = Color.white;
 
   [SerializeField, Range(0f, 10f)]
-  private float outlineWidth = 2f;
+  private float outlineWidth = 10f; //varsayılan outline kalınlığı, burayı da değiştirdim
 
   [Header("Optional")]
 
@@ -115,6 +115,7 @@ public class Outline : MonoBehaviour {
 
       renderer.materials = materials.ToArray();
     }
+    UpdateMaterialProperties(); //ilave!!
   }
 
   void OnValidate() {

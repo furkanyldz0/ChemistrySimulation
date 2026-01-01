@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,7 +5,7 @@ using UnityEngine;
 public class MainExperimentBeaker : MonoBehaviour {
     public static MainExperimentBeaker Instance { get; private set; }
 
-    [SerializeField] private MainExperimentSelection ingredientManager;
+    [SerializeField] private MainExperimentSelection mainSelectionManager;
     [SerializeField] private List<RecipeSO> allRecipes;
 
     [SerializeField] private MeshRenderer mainLiquidRenderer;
@@ -26,7 +25,7 @@ public class MainExperimentBeaker : MonoBehaviour {
     }
 
     private void Start() {
-        ingredientManager.OnIngredientAdded += ÝngredientManager_OnIngredientAdded;
+        mainSelectionManager.OnIngredientAdded += ÝngredientManager_OnIngredientAdded;
         labObjects = new List<LabObject>();
 
         if(Instance != null) {
