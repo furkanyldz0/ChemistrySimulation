@@ -5,8 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MainExperimentSelection : MonoBehaviour
-{
+public class FireExperimentSelection : MonoBehaviour {
     public event EventHandler<OnIngredientAddedEventArgs> OnIngredientAdded;
     public class OnIngredientAddedEventArgs : EventArgs {
         public LabObject labObject;
@@ -15,18 +14,16 @@ public class MainExperimentSelection : MonoBehaviour
     [SerializeField] private Transform addingPositionTransform;
     private Transform selectedIngredient, highlight;
 
-    private float addingTime = 2f;
+    private float addingTime = .5f;
     private float addingTimeCounter;
 
     private Vector3 lastIngredientPosition;
     private Quaternion lastIngredientRotation;
 
     private bool isAdding;
-    
 
     private void Update() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         if (Input.GetMouseButtonDown(0)) {
             if (!EventSystem.current.IsPointerOverGameObject() &&
                 Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, interactableLayer)) {
@@ -34,48 +31,38 @@ public class MainExperimentSelection : MonoBehaviour
                 if (highlight.TryGetComponent<LabObject>(out LabObject labObject)) { //highlight.CompareTag("Item")
                     if (!isAdding) {
                         if (!labObject.GetLabObjectSO().isLiquid)
-                            AddSolidIngredient(highlight);
-                        else
+                            AddIngredient(highlight);
+                        /*else
                             AddReusableIngredient(highlight);
+                         sývýlar için, alkol lambasý ile yapýlacak deneylerde sývý
+                         kullanýmý þuanlýk yok */
                     }
                 }
             }
-            else { //raycast ile bir nesne algýlanmýyorsa
+            else { 
                 highlight = null;
             }
         }
 
         HandleAddingIngredient();
     }
-    private void AddReusableIngredient(Transform highlight) {
+
+    private void AddIngredient(Transform highlight) {
         selectedIngredient = highlight;
 
-        //malzemenin masadaki konumunu ve rotasyonunu tutuyor
-        lastIngredientPosition = selectedIngredient.position;
-        lastIngredientRotation = selectedIngredient.rotation;
+        float scaleMultiplier = 0.5f;
+        var objectScale = selectedIngredient.localScale;
+        objectScale = new Vector3(objectScale.x * scaleMultiplier, objectScale.y * scaleMultiplier, objectScale.z * scaleMultiplier); //ateþ deneyindeki beher küçük olduðu için malzemeler büyük geliyor, küçültme iþlemi yapýlmasý gerekiyor
+        selectedIngredient.localScale = objectScale;
 
         selectedIngredient.position = addingPositionTransform.position;
-        selectedIngredient.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        addingTimeCounter = addingTime;
-        isAdding = true;
-        
-        Debug.Log("Malzeme ekleniyor...");
-
-        PlayAddAnimation(selectedIngredient);
-    }
-    private void AddSolidIngredient(Transform highlight) {
-        selectedIngredient = highlight; //- 1.3f
-        var ingredientPos = addingPositionTransform.position;
-        ingredientPos.z += 0.13f; //beherin merkezi
-        selectedIngredient.position = ingredientPos;
-
-        AdjustRigidbodies(highlight);
+        AdjustRigidbodies(selectedIngredient);
 
         addingTimeCounter = addingTime / 4;
         isAdding = true;
-        
-        Debug.Log("Katý malzeme ekleniyor...");
+
+        Debug.Log("Katý malzeme ekleniyor... " + this.ToString());
     }
 
     private void AdjustRigidbodies(Transform transform) {
@@ -95,8 +82,6 @@ public class MainExperimentSelection : MonoBehaviour
                 col.enabled = true;
                 col.transform.AddComponent<Rigidbody>();
             }
-
-
         }
         else {
             rb.isKinematic = false;
@@ -109,7 +94,7 @@ public class MainExperimentSelection : MonoBehaviour
             addingTimeCounter -= Time.deltaTime;
             if (selectedIngredient != null && addingTimeCounter <= 0f) {
                 //malzemenin masadaki konumunu ve rotasyonuna geri döndürüyor
-                if (selectedIngredient.TryGetComponent(out LabObject labObject) 
+                if (selectedIngredient.TryGetComponent(out LabObject labObject)
                     && labObject.GetLabObjectSO().isLiquid) {
                     selectedIngredient.position = lastIngredientPosition;
                     selectedIngredient.rotation = lastIngredientRotation;
@@ -131,36 +116,16 @@ public class MainExperimentSelection : MonoBehaviour
             });
         }
     }
-    private void PlayAddAnimation(Transform selectedIngredient) {
-        float timeOffset = 0.05f; //eðer animasyon süresi adding süresinden fazla olursa animasyonda takýlý kalýyor
-        float spillAnimationCycleDuration = (addingTime - timeOffset) / 2;
-
-        selectedIngredient.DORotate(Vector3.right * 90f, spillAnimationCycleDuration)
-            .SetLoops(2, LoopType.Yoyo)
-            .SetEase(Ease.OutCubic); //Ease.OutCubic //Ease.OutCirc //Ease.OutBack
-
-        var liquidSpillAnimation = selectedIngredient.GetComponentInChildren<ParticleSystem>();
-
-        if (liquidSpillAnimation != null) 
-            StartCoroutine(PlayEffectRoutine(liquidSpillAnimation, .2f));
-
-    }
-
-    private IEnumerator PlayEffectRoutine(ParticleSystem effect, float duration) {
-        yield return new WaitForSeconds(duration);
-        effect.Play();
-    }
 
     public void ScriptSetActive(bool check) {
         if (check) {
             enabled = true;
             //Debug.Log("MainExperimentSelection.enabled = true");
-        }  
+        }
         else
             StartCoroutine(DisableScriptRoutine(addingTimeCounter)); //malzemeyi koyarken deaktive olmasýný engellemek için routine kullanýyoruz
 
     }
-
     private IEnumerator DisableScriptRoutine(float duration) {
         yield return new WaitForSeconds(duration);
         enabled = false;

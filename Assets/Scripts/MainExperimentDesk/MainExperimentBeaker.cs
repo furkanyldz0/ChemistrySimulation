@@ -29,7 +29,7 @@ public class MainExperimentBeaker : MonoBehaviour {
         labObjects = new List<LabObject>();
 
         if(Instance != null) {
-            Debug.LogError("Birden fazla BeakerManager nesnesi var!");
+            Debug.LogError("Sahnedew birden fazla var!: " + this);
         }
         Instance = this;
     }
@@ -65,11 +65,13 @@ public class MainExperimentBeaker : MonoBehaviour {
     private void StartReaction(RecipeSO recipe) {
         currentRecipe = recipe;
         isReactionPerforming = true;
+        //PerformReaction(currentRecipe); gecikmeli
     }
 
     private void StopReaction() {
         currentRecipe = null;
         isReactionPerforming = false;
+        reactPerformTime = 0.5f; //default deðeri, yeni deðiþken koymaya üþendim
     }
 
     private void HandleReaction() {
@@ -97,7 +99,7 @@ public class MainExperimentBeaker : MonoBehaviour {
 
     private void ResetBeaker() {
         foreach (LabObject ingredient in labObjects) {
-            if (!ingredient.GetLabObjectSO().isReusable)
+            if (!ingredient.GetLabObjectSO().isLiquid)
                 Destroy(ingredient.gameObject); //tekrar kullanýlmayan maddeler yok olsun
         }
         ResetLiquid(); //içindeki sývýnýn sýfýrlanmasýný tepkime scriptleri halletsin

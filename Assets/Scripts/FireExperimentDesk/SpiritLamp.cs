@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [SelectionBase] //sahnede týklandýðýnda parenti seçer
@@ -5,6 +6,8 @@ public class SpiritLamp : MonoBehaviour
 {
     [SerializeField] private ParticleSystem fireEffect;
     [SerializeField] private LayerMask interactableLayer;
+
+    public event EventHandler<EventArgs> OnLightAction;
 
     private bool isBurning;
 
@@ -42,10 +45,10 @@ public class SpiritLamp : MonoBehaviour
             }
         }
     }
-
     private void LightLamp() {
         //Debug.Log("Lamba yanýk");
         fireEffect.Play();
+        OnLightAction?.Invoke(this, EventArgs.Empty); //malzeme kontrolünü beaker'da yapacaðýmýz için custom args yazmaya gerek yok
         isBurning = true;
     }
 

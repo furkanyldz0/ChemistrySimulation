@@ -7,10 +7,12 @@ public class DeskManager : MonoBehaviour
     [SerializeField] private SpiritLamp spiritLamp;
 
     private MainExperimentSelection mainExperimentSelection;
+    private FireExperimentSelection fireExperimentSelection;
     
     private void Start()
     {
         mainExperimentSelection = FindAnyObjectByType<MainExperimentSelection>();
+        fireExperimentSelection = FindAnyObjectByType<FireExperimentSelection>();
         LookAtMainExperimentTable();
     }
 
@@ -18,18 +20,21 @@ public class DeskManager : MonoBehaviour
         cameraManager.ActivateMainExperimentTableCamera();
         uiManager.DisableLookAtMainExperimentTableButton();
         mainExperimentSelection.ScriptSetActive(true);
+        fireExperimentSelection.ScriptSetActive(false); //metotta bug var, düzeltilecek
         spiritLamp.enabled = false;
     }
     public void LookAtFireExperimentTable() {
         cameraManager.ActivateFireExperimentTableCamera();
         uiManager.DisableLookAtFireExperimentTableButton();
         mainExperimentSelection.ScriptSetActive(false);
+        fireExperimentSelection.ScriptSetActive(true);
         spiritLamp.enabled = true;
     }
     public void LookAtShelf() {
         cameraManager.ActivateShelfCamera();
         uiManager.DisableLookAtShelfButton();
         mainExperimentSelection.ScriptSetActive(false);
+        fireExperimentSelection.ScriptSetActive(false);
         spiritLamp.enabled = false;
     }
 
