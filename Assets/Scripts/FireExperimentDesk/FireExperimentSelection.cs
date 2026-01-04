@@ -7,12 +7,16 @@ using UnityEngine.EventSystems;
 
 public class FireExperimentSelection : MonoBehaviour {
     public event EventHandler<OnIngredientAddedEventArgs> OnIngredientAdded;
+    public event EventHandler<OnIngredientAddedEventArgs> OnMetalStickHeld;
+    public event EventHandler<EventArgs> OnMetalStickReleased;
     public class OnIngredientAddedEventArgs : EventArgs {
         public LabObject labObject;
     }
     [SerializeField] private LayerMask interactableLayer = new LayerMask();
     [SerializeField] private Transform addingPositionTransform;
+    [SerializeField] private Transform stickHoldPositionTransform;
     private Transform selectedIngredient, highlight;
+    private Transform selectedStick;
 
     private float addingTime = .5f;
     private float addingTimeCounter;
@@ -21,17 +25,24 @@ public class FireExperimentSelection : MonoBehaviour {
     private Quaternion lastIngredientRotation;
 
     private bool isAdding;
+    private bool isHoldingStick; //metal çubuðun tutulma durumu
 
     private void Update() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Input.GetMouseButtonDown(0)) {
-            if (!EventSystem.current.IsPointerOverGameObject() &&
-                Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, interactableLayer)) {
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, interactableLayer)) {
                 highlight = raycastHit.transform;
                 if (highlight.TryGetComponent<LabObject>(out LabObject labObject)) { //highlight.CompareTag("Item")
                     if (!isAdding) {
-                        if (!labObject.GetLabObjectSO().isLiquid)
+                        LabObjectSO labObjectSO = labObject.GetLabObjectSO();
+                        if (!labObjectSO.isLiquid && !labObjectSO.isMetalStick)
                             AddIngredient(highlight);
+                        else if (labObjectSO.isMetalStick && !isHoldingStick) {
+                            HoldStick(labObject);
+                        }
+                        else if (labObjectSO.isMetalStick && isHoldingStick) {
+                            ReleaseStick();
+                        }
                         /*else
                             AddReusableIngredient(highlight);
                          sývýlar için, alkol lambasý ile yapýlacak deneylerde sývý
@@ -47,6 +58,26 @@ public class FireExperimentSelection : MonoBehaviour {
         HandleAddingIngredient();
     }
 
+    private void HoldStick(LabObject labObject) {
+        selectedStick = labObject.transform;
+        isHoldingStick = true;
+        //güncellenecek, boþ gameobject konulabilir
+        lastIngredientPosition = labObject.transform.position;
+        lastIngredientRotation = labObject.transform.rotation;
+        labObject.transform.position = stickHoldPositionTransform.position;
+        labObject.transform.rotation = stickHoldPositionTransform.rotation;
+        OnMetalStickHeld?.Invoke(this, new OnIngredientAddedEventArgs {
+            labObject = labObject
+        });
+    }
+
+    private void ReleaseStick() {
+        isHoldingStick = false;
+        selectedStick.transform.position = lastIngredientPosition;
+        selectedStick.transform.rotation = lastIngredientRotation;
+        OnMetalStickReleased?.Invoke(this, EventArgs.Empty);
+
+    }
     private void AddIngredient(Transform highlight) {
         selectedIngredient = highlight;
 
@@ -88,6 +119,13 @@ public class FireExperimentSelection : MonoBehaviour {
             rb.useGravity = true;
         }
     }
+    private void TryAddingIngredientToBeaker(Transform selectedIngredient) { //karýþým hazýrlanmak istiyorsa
+        if (selectedIngredient.TryGetComponent(out LabObject labObject)) {   //muhakkak nesnelerde labobject scripti olmalý
+            OnIngredientAdded?.Invoke(this, new OnIngredientAddedEventArgs { //yoksa malzeme eklendi sayýlmaz
+                labObject = labObject
+            });
+        }
+    }
 
     private void HandleAddingIngredient() {
         if (isAdding) {
@@ -109,14 +147,7 @@ public class FireExperimentSelection : MonoBehaviour {
             }
         }
     }
-    private void TryAddingIngredientToBeaker(Transform selectedIngredient) { //karýþým hazýrlanmak istiyorsa
-        if (selectedIngredient.TryGetComponent(out LabObject labObject)) {   //muhakkak nesnelerde labobject scripti olmalý
-            OnIngredientAdded?.Invoke(this, new OnIngredientAddedEventArgs { //yoksa malzeme eklendi sayýlmaz
-                labObject = labObject
-            });
-        }
-    }
-
+    
     public void ScriptSetActive(bool check) {
         if (check) {
             enabled = true;

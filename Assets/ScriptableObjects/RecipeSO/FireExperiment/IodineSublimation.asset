@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipeName: IodineSublimation
   requiredIngredients:
-  - {fileID: 11400000, guid: 3921b48a34db0054bbbe4d1d04e24e75, type: 2}
+  - {fileID: 11400000, guid: a739d179f61a5034d8cd4b892e16a17d, type: 2}
   reaction: {fileID: 1335177648575356259, guid: f5ab101157ce83e46bb482dffc9c244c,
     type: 3}

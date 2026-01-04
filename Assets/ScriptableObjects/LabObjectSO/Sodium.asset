@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed160b478b23873498fd87d4fefd0bfc, type: 3}
   m_Name: Sodium
   m_EditorClassIdentifier: 
-  objectName: Sodium
-  prefab: {fileID: 2969058837845906185, guid: 412f5a0399040f04aa2dd475fe5f822d, type: 3}
+  objectName: Sodyum
+  deskPosition: {fileID: 0}
+  isLiquid: 0
+  isMetalStick: 0
+  hasMultipleMeshes: 0
+  color: {r: 0, g: 0, b: 0, a: 0}

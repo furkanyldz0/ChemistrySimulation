@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5520768653304784539}
   - component: {fileID: 2678702184292141726}
   - component: {fileID: 542087810113239465}
-  - component: {fileID: 6553049364827881140}
   m_Layer: 6
   m_Name: ErlenmeyerWithWater
   m_TagString: Untagged
@@ -73,19 +72,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labObjectSO: {fileID: 11400000, guid: 96a0eb7b257537048a03e71320e00c99, type: 2}
---- !u!114 &6553049364827881140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1927201404718978642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fd82f9b4ce62d74e9dd04561dedd97d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 57c00a8aaaecaf642beb6ea39c7de785, type: 2}
 --- !u!1 &8061004583448748378
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed160b478b23873498fd87d4fefd0bfc, type: 3}
   m_Name: Honey
   m_EditorClassIdentifier: 
-  objectName: Honey
-  prefab: {fileID: 5520768653304784539, guid: 054c7ddd19ed11647ac48ea37ede064d, type: 3}
-  isReusable: 1
+  objectName: Bal
+  deskPosition: {fileID: 0}
   isLiquid: 1
+  isMetalStick: 0
+  hasMultipleMeshes: 0
   color: {r: 1, g: 0.6431373, b: 0, a: 1}

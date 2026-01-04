@@ -5,9 +5,11 @@ public class LabObjectSO : ScriptableObject
 {
     [Header("Malzeme Özellikleri")]
     public string objectName;
-    public Transform prefab;
+    public Transform deskPosition;
     public bool isLiquid;
+    public bool isMetalStick;
     public bool hasMultipleMeshes;
 
+    [Header("Sývý veya Çubuk Rengi")]
     public Color color;
 }

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed160b478b23873498fd87d4fefd0bfc, type: 3}
   m_Name: SilverNitrate
   m_EditorClassIdentifier: 
-  objectName: SilverNitrate
-  prefab: {fileID: 2588253281623917580, guid: e5ca946f39da0ac48b4a0295f9dc708b, type: 3}
-  isReusable: 0
+  objectName: "G\xFCm\xFC\u015F Nitrat"
+  deskPosition: {fileID: 0}
   isLiquid: 0
+  isMetalStick: 0
+  hasMultipleMeshes: 0
   color: {r: 0.83921576, g: 0.8235295, b: 0.8352942, a: 0}

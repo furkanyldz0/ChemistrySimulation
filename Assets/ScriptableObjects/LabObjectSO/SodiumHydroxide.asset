@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed160b478b23873498fd87d4fefd0bfc, type: 3}
   m_Name: SodiumHydroxide
   m_EditorClassIdentifier: 
-  objectName: 'SodiumHydroxide '
-  prefab: {fileID: 2918519929240649427, guid: 0d5ef0dda92367346b062ef80c21e34d, type: 3}
-  isReusable: 0
+  objectName: Sodyum Hidroksit
+  deskPosition: {fileID: 0}
   isLiquid: 0
+  isMetalStick: 0
   hasMultipleMeshes: 1
   color: {r: 0.9960785, g: 0.9686275, b: 0.95294124, a: 0}

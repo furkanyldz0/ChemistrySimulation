@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed160b478b23873498fd87d4fefd0bfc, type: 3}
   m_Name: Alcohol
   m_EditorClassIdentifier: 
-  objectName: Alcohol
-  prefab: {fileID: 8812965699712737081, guid: 4813e23235947b347892888ca5b5c840, type: 3}
-  isReusable: 1
+  objectName: Alkol
+  deskPosition: {fileID: 0}
   isLiquid: 1
+  isMetalStick: 0
+  hasMultipleMeshes: 0
   color: {r: 0.8509804, g: 0.8509804, b: 0.8509804, a: 0.6666667}

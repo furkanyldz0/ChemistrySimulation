@@ -11,7 +11,7 @@ public class FireExperimentBeaker : MonoBehaviour
     [SerializeField] private FireExperimentSelection fireExperimentSelection;
     [SerializeField] private List<RecipeSO> allRecipes;
 
-    public float reactionDuration { get; private set; } = 1f;
+    public float reactionDuration { get; private set; } = 4f; //tepkimenin son bulup malzemelerin sýfýrlandýðý süre
 
     private RecipeSO currentRecipe;
 
@@ -20,7 +20,7 @@ public class FireExperimentBeaker : MonoBehaviour
     private void Start()
     {
         if (Instance != null) {
-            Debug.LogError("Sahnedew birden fazla var!: " + this);
+            Debug.LogError("Sahnede birden fazla var!: " + this);
         }
         Instance = this;
 
@@ -74,7 +74,7 @@ public class FireExperimentBeaker : MonoBehaviour
 
     private void StartReaction(RecipeSO recipe) {
         currentRecipe = recipe;
-        StartCoroutine(PerformActionCoroutine(2f, currentRecipe));
+        StartCoroutine(PerformActionCoroutine(1.5f, currentRecipe));
     }
 
     private IEnumerator PerformActionCoroutine(float performDuration, RecipeSO currentRecipe) {
@@ -84,12 +84,9 @@ public class FireExperimentBeaker : MonoBehaviour
 
     private void PerformReaction(RecipeSO recipe) {
         Debug.Log("Tepkime baþladý: " + recipe.recipeName);
-        float yOffset = 0.11f; //güncellenecek, y'de alçak olmasý gerekiyor
-        Vector3 reactionPos = transform.position;
-        reactionPos.y += yOffset;
 
         if (recipe.reaction != null) {
-            Instantiate(recipe.reaction, reactionPos, Quaternion.identity);
+            Instantiate(recipe.reaction, transform.position, Quaternion.identity);
         }
 
         StartCoroutine(ResetBeakerCoroutine(reactionDuration)); //2sn sonra gerçekleþsin, deðiþkenden tepkimenin de haberi olmasý gerekiyor

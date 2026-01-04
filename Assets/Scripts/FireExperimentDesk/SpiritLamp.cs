@@ -5,32 +5,31 @@ using UnityEngine;
 public class SpiritLamp : MonoBehaviour
 {
     [SerializeField] private ParticleSystem fireEffect;
+    [SerializeField] private Material fireMaterial;
+    [SerializeField] private Material fireMaterialBackup;
     [SerializeField] private LayerMask interactableLayer;
+    private FireExperimentSelection fireExperimentSelection;
 
     public event EventHandler<EventArgs> OnLightAction;
 
     private bool isBurning;
 
-    /*
-    1-FireExperimentBeaker scripti oluþturulacak
-    2-spiritlamp scripti her lamba açýldýðýnda event tetikleyecek, 
-        bu eventle beher scripti de malzemeleri kontrol edecek
-    3-malzemeler tam ise iyot süblimleþmesi beaker scriptinde baþlatýlacak
-    4-selection scripti yazýldýðýnda (veya var olan scipt düzenlenerek,
-        ama coroutine ile yapýcam) alev çubuðu scripti yazmak yerine tip
-        kontrolü yapýlabilir
-    5-raf kýsmýnda malzemelerin hepsi dizilecek, objelerin üstüne geldiðinde ismiyle
-        beraber açýklamasý yer alacak ve üzerine bir kere týklandýðýnda "þuraya koy:ana
-        veya ateþ deneyi masasý" þeklinde seçenekler çýkacak.
-        --sývý ile ateþ deneyi þimdilik olmayacaðýndan onlarda çýkmayabilir
-    6-katý malzemeler ilk kullanýldýðýnda yok olacak (raftan tekrar alýnabilir), sývýlar
-        ise masada kalacak, sað klik ile rafa tekrar konabilir
-        
-     */
-
     private void Start() {
+        ResetFlameColor();
+        fireExperimentSelection = FindAnyObjectByType<FireExperimentSelection>();
+        fireExperimentSelection.OnMetalStickHeld += FireExperimentSelection_OnMetalStickHeld;
+        fireExperimentSelection.OnMetalStickReleased += FireExperimentSelection_OnMetalStickReleased;
     }
 
+    private void FireExperimentSelection_OnMetalStickReleased(object sender, EventArgs e) {
+        ResetFlameColor();
+        Debug.Log("çubuk býrakýldý.");
+    }
+
+    private void FireExperimentSelection_OnMetalStickHeld(object sender, FireExperimentSelection.OnIngredientAddedEventArgs e) {
+        ChangeFlameColor(e.labObject);
+        Debug.Log("çubuk tutuluyor...");
+    }
 
     private void Update() {
         if (Input.GetMouseButtonDown(0)) {
@@ -44,6 +43,20 @@ public class SpiritLamp : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void ChangeFlameColor(LabObject labObject) {
+        var labObjectFlameColor = labObject.GetLabObjectSO().color;
+        float intensity = Mathf.Pow(2, 4f); //intensity'nin 4 olmasý için
+
+        fireMaterial.color = labObjectFlameColor * intensity;
+        //fireMaterial.color.a = labObjectFlameColor.a * intensity;
+
+    }
+
+    private void ResetFlameColor() {
+
+        fireMaterial.color = fireMaterialBackup.color;
     }
     private void LightLamp() {
         //Debug.Log("Lamba yanýk");

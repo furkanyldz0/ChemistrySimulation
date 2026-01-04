@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed160b478b23873498fd87d4fefd0bfc, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  objectName: Water
-  prefab: {fileID: 5520768653304784539, guid: 054c7ddd19ed11647ac48ea37ede064d, type: 3}
-  isReusable: 1
+  objectName: Su
+  deskPosition: {fileID: 0}
   isLiquid: 1
+  isMetalStick: 0
+  hasMultipleMeshes: 0
   color: {r: 0.32156864, g: 0.8, b: 1, a: 0.7058824}

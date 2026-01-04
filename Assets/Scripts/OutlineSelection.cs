@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,9 +15,7 @@ public class OutlineSelection : MonoBehaviour {
             highlight = null;
         }
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (!EventSystem.current.IsPointerOverGameObject()
-            && Physics.Raycast(ray, out raycastHit, Mathf.Infinity, interactableLayer)) 
-        {
+        if (Physics.Raycast(ray, out raycastHit, Mathf.Infinity, interactableLayer)) {
             highlight = raycastHit.transform;
             if (highlight != selection) { //highlight.GetComponent<LabObject>() highlight.CompareTag("Item")
                 if (highlight.gameObject.GetComponent<Outline>() != null) {
@@ -32,23 +31,7 @@ public class OutlineSelection : MonoBehaviour {
             }
         }
 
-        //// Selection
-        //if (Input.GetMouseButtonDown(0)) {
-        //    if (highlight) {
-        //        if (selection != null) {
-        //            selection.gameObject.GetComponent<Outline>().enabled = false;
-        //        }
-        //        selection = raycastHit.transform;
-        //        selection.gameObject.GetComponent<Outline>().enabled = true;
-        //        highlight = null;
-        //    }
-        //    else {
-        //        if (selection) {
-        //            selection.gameObject.GetComponent<Outline>().enabled = false;
-        //            selection = null;
-        //        }
-        //    }
-        //}
     }
+
 
 }

@@ -28,8 +28,7 @@ public class MainExperimentSelection : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Input.GetMouseButtonDown(0)) {
-            if (!EventSystem.current.IsPointerOverGameObject() &&
-                Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, interactableLayer)) {
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, interactableLayer)) {
                 highlight = raycastHit.transform;
                 if (highlight.TryGetComponent<LabObject>(out LabObject labObject)) { //highlight.CompareTag("Item")
                     if (!isAdding) {

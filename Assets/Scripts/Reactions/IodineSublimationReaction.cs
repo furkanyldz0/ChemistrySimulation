@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class IodineSublimationReaction : MonoBehaviour
 {
-    private float life = 5f;
     private FireExperimentBeaker beaker;
     private Transform ingredient;
+    private float life = 30f; //duman iyice daðýlsýn
     private float reactionDuration;
     private Vector3 scaleRatePerSecond;
 
@@ -23,7 +23,8 @@ public class IodineSublimationReaction : MonoBehaviour
         }
         else Debug.Log(this + " baþladý ama beaker ve ingredient boþ!");
 
-            Destroy(gameObject, life);
+        transform.position += Vector3.up * 0.01f; //dumanýn beherde az mesafe daha yüksekten baþlamasý için
+        Destroy(gameObject, life);
     }
 
     private void Update() {
@@ -31,7 +32,7 @@ public class IodineSublimationReaction : MonoBehaviour
 
         reactionDuration -= Time.deltaTime;
         if(reactionDuration >= 0f) {
-            Debug.Log(ingredient.localScale);
+            //Debug.Log(ingredient.localScale);
             ingredient.localScale -= scaleRatePerSecond * Time.deltaTime;
         }
         else {

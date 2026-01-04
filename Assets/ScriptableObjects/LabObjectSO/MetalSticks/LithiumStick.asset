@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed160b478b23873498fd87d4fefd0bfc, type: 3}
+  m_Name: LithiumStick
+  m_EditorClassIdentifier: 
+  objectName: "Lityum \xC7ubu\u011Fu"
+  deskPosition: {fileID: 0}
+  isLiquid: 0
+  isMetalStick: 1
+  hasMultipleMeshes: 0
+  color: {r: 1, g: 0.038859192, b: 0, a: 1}
