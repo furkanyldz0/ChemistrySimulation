@@ -6,7 +6,7 @@ public class DisplayNameSelection : MonoBehaviour {
     [SerializeField] private LayerMask interactableLayer = new LayerMask();
     [SerializeField] private TextMeshProUGUI displayText;
 
-    void Update() {
+    private void Update() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, interactableLayer)) {
             DisplayName(raycastHit.transform);

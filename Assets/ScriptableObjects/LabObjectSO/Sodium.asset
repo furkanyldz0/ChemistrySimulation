@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sodium
   m_EditorClassIdentifier: 
   objectName: Sodyum
-  deskPosition: {fileID: 0}
+  deskPosition: {x: -1.596, y: 1.145, z: 0.737}
   isLiquid: 0
   isMetalStick: 0
   hasMultipleMeshes: 0

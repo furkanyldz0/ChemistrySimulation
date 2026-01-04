@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CopperStick
   m_EditorClassIdentifier: 
   objectName: "Bak\u0131r \xC7ubu\u011Fu"
-  deskPosition: {fileID: 0}
+  deskPosition: {x: -3.515, y: 1.1197, z: 2.337}
   isLiquid: 0
   isMetalStick: 1
   hasMultipleMeshes: 0

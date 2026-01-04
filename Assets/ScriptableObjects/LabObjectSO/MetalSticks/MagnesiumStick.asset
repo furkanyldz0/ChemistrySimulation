@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MagnesiumStick
   m_EditorClassIdentifier: 
   objectName: "Magnezyum \xC7ubu\u011Fu"
-  deskPosition: {fileID: 0}
+  deskPosition: {x: -3.595, y: 1.1197, z: 2.362}
   isLiquid: 0
   isMetalStick: 1
   hasMultipleMeshes: 0

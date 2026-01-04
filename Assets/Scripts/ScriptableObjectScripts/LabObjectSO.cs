@@ -5,7 +5,7 @@ public class LabObjectSO : ScriptableObject
 {
     [Header("Malzeme Özellikleri")]
     public string objectName;
-    public Transform deskPosition;
+    public Vector3 deskPosition;
     public bool isLiquid;
     public bool isMetalStick;
     public bool hasMultipleMeshes;

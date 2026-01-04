@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Oil
   m_EditorClassIdentifier: 
   objectName: "Ya\u011F"
-  deskPosition: {fileID: 0}
+  deskPosition: {x: -1.302, y: 1.171, z: -0.163}
   isLiquid: 1
   isMetalStick: 0
   hasMultipleMeshes: 0

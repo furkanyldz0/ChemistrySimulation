@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Iodine
   m_EditorClassIdentifier: 
   objectName: "\u0130yot"
-  deskPosition: {fileID: 0}
+  deskPosition: {x: -3.0356, y: 1.159, z: 2.3792}
   isLiquid: 0
   isMetalStick: 0
   hasMultipleMeshes: 1

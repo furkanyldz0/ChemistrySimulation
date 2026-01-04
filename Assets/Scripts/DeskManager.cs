@@ -8,11 +8,13 @@ public class DeskManager : MonoBehaviour
 
     private MainExperimentSelection mainExperimentSelection;
     private FireExperimentSelection fireExperimentSelection;
+    private ShelfIngredientSelection shelfIngredientSelection;
     
     private void Start()
     {
         mainExperimentSelection = FindAnyObjectByType<MainExperimentSelection>();
         fireExperimentSelection = FindAnyObjectByType<FireExperimentSelection>();
+        shelfIngredientSelection = FindAnyObjectByType<ShelfIngredientSelection>();
         LookAtMainExperimentTable();
     }
 
@@ -21,6 +23,7 @@ public class DeskManager : MonoBehaviour
         uiManager.DisableLookAtMainExperimentTableButton();
         mainExperimentSelection.ScriptSetActive(true);
         fireExperimentSelection.ScriptSetActive(false); //metotta bug var, düzeltilecek
+        shelfIngredientSelection.enabled = false;
         spiritLamp.enabled = false;
     }
     public void LookAtFireExperimentTable() {
@@ -28,6 +31,7 @@ public class DeskManager : MonoBehaviour
         uiManager.DisableLookAtFireExperimentTableButton();
         mainExperimentSelection.ScriptSetActive(false);
         fireExperimentSelection.ScriptSetActive(true);
+        shelfIngredientSelection.enabled = false;
         spiritLamp.enabled = true;
     }
     public void LookAtShelf() {
@@ -35,6 +39,7 @@ public class DeskManager : MonoBehaviour
         uiManager.DisableLookAtShelfButton();
         mainExperimentSelection.ScriptSetActive(false);
         fireExperimentSelection.ScriptSetActive(false);
+        shelfIngredientSelection.enabled = true;
         spiritLamp.enabled = false;
     }
 

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed160b478b23873498fd87d4fefd0bfc, type: 3}
   m_Name: PotassiumStick
   m_EditorClassIdentifier: 
-  objectName: "Potazyum \xC7ubu\u011Fu"
-  deskPosition: {fileID: 0}
+  objectName: "Potasyum \xC7ubu\u011Fu"
+  deskPosition: {x: -3.635, y: 1.1197, z: 2.38}
   isLiquid: 0
   isMetalStick: 1
   hasMultipleMeshes: 0

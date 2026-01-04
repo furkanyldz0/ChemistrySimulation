@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CesiumStick
   m_EditorClassIdentifier: 
   objectName: "Sezyum \xC7ubu\u011Fu"
-  deskPosition: {fileID: 0}
+  deskPosition: {x: -3.675, y: 1.1197, z: 2.409}
   isLiquid: 0
   isMetalStick: 1
   hasMultipleMeshes: 0
