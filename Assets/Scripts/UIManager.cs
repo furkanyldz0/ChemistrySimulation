@@ -1,4 +1,6 @@
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -6,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button lookAtMainExperimentTableButton;
     [SerializeField] private Button lookAtFireExperimentTableButton;
     [SerializeField] private Button LookAtShelfButton;
+    [SerializeField] private GameObject infoPanel;
     [SerializeField] private Transform leftCorner1, leftCorner2, rightCorner1, rightCorner2;
 
     public void DisableLookAtShelfButton() {
@@ -28,5 +31,17 @@ public class UIManager : MonoBehaviour
         LookAtShelfButton.gameObject.SetActive(true);
         LookAtShelfButton.transform.position = rightCorner1.position;
         lookAtMainExperimentTableButton.transform.position = rightCorner2.position;
+    }
+
+    public void RestartScene() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ShowInfoPanel() {
+        infoPanel.SetActive(true);
+    }
+
+    public void HideInfoPanel() {
+        infoPanel.SetActive(false);
     }
 }
